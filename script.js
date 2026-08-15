@@ -63,7 +63,7 @@ function changeBG(weather) {
   let body = document.body;
 
   if (weather == "Clear") {
-    body.style.backgroundImage = "url('clearWheather.jpg')";
+    body.style.backgroundImage = "url('clearWeather.jpg')";
   }
   else if (weather == "Clouds") {
     body.style.backgroundImage = "url('cloudyWeather.jpg')";
