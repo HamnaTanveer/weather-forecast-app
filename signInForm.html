@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SignIn Form</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+
+background:url("picc.jpg");
+background-size:cover;
+background-position:center;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+}
+
+/* orange overlay */
+
+.background{
+
+background:rgba(0, 0, 0, 0.6);
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+
+}
+
+/* form box */
+
+.container{
+
+text-align:center;
+color:white;
+width:320px;
+
+}
+
+h1{
+margin-bottom:10px;
+}
+
+.p{
+margin-bottom:20px;
+font-size:14px;
+
+}
+
+.p2{
+margin-top:20px;
+font-size:14px;
+}
+
+/* input boxes */
+
+input{
+
+width:100%;
+padding:12px;
+margin:10px 0;
+background:transparent;
+border:1px solid white;
+border-radius:20px;
+color:white;
+
+}
+
+input::placeholder{
+color:white;
+}
+
+/* forget password */
+
+.forget{
+font-size:13px;
+margin-bottom:25px;
+text-align: right;
+}
+
+/* sign in button */
+
+.signin{
+
+width:100%;
+padding:12px;
+background:rgb(224, 97, 28);
+border:none;
+border-radius:20px;
+cursor:pointer;
+font-weight:bold;
+color:white;
+}
+
+.signin:hover{
+background:black;
+color:white;
+}
+
+/* social buttons */
+
+.btns{
+
+display:flex;
+gap:10px;
+margin-top:15px;
+
+}
+
+.btns button{
+
+flex:1;
+padding:12px;
+background:white;
+border:none;
+cursor:pointer;
+height:40px;
+font-weight:bold;
+border-radius: 5px;
+
+}
+
+/* signup button */
+
+.signup{
+
+margin-top:20px;
+padding:14px 35px;
+background:white;
+border:none;
+cursor:pointer;
+font-weight:bold;
+width: 100%;
+border-radius: 5px;
+
+}
+
+/* .signup:hover{
+background:black;
+color:white;
+} */
+
+</style>
+
+</head>
+
+<body>
+
+<div class="background">
+
+<div class="container">
+
+<h1>Sign In Form</h1>
+
+<div class="p">Have an account?</div>
+
+<input type="text" id="username" placeholder="Username">
+
+<input type="password" id="password" placeholder="Password">
+
+<div class="forget">Forget Your Password?</div>
+
+<button class="signin" id="signinBtn">Sign In</button>
+
+<div class="p2">OR Create a New Account</div>
+
+<div class="btns">
+
+<button>Google</button>
+<button>Facebook</button>
+
+</div>
+
+<br>
+
+<a href="signUpForm.html">
+<button class="signup">Sign Up</button>
+</a>
+
+</div>
+
+</div>
+<script>
+
+
+
+    const btnsignin = document.getElementById("signinBtn");
+
+    btnsignin.addEventListener("click", function(e){
+        e.preventDefault(); 
+
+      
+
+        const usernameInput = document.getElementById("username").value;
+        const passwordInput = document.getElementById("password").value;
+
+      
+        if(usernameInput && passwordInput){
+            
+           
+            
+            alert("Sign In Successfully!");
+            
+            
+            window.location.href = "signUpForm.html"; 
+            
+        } else {
+            alert("Please enter Username and Password!");
+        }
+    });
+
+
+
+ /*    
+   const signinBtn = document.getElementById("signinBtn");
+
+signinBtn.addEventListener("click", function(){
+
+    const usernameInput = document.getElementById("username").value;
+    const passwordInput = document.getElementById("password").value;
+
+    const savedUsername = localStorage.getItem("Username");
+    const savedPassword = localStorage.getItem("Password");
+
+    
+  
+
+}); */
+
+
+    // Step 3: Load Saved Data When Page Loads
+   
+      /*   const savedUsername = localStorage.getItem('savedUsername');
+        const savedPassword = localStorage.getItem('savedPassword');
+
+        if(savedUsername) {
+            usernameInput.value = savedUsername;
+        }
+        if(savedPassword) {
+            passwordInput.value = savedPassword;
+        } */
+    
+</script>
+
+
+</body>
+</html>

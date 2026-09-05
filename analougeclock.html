@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analouge Clock</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+  }
+
+  .clock-wrapper {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: url('c3.png')no-repeat center/cover; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  }
+
+  .hand {
+    position: absolute;
+    width: 35%;
+    top: 50%;
+    left: 50%;
+  transform-origin: 0% 50%;
+  transform: translate(-50%, -50%);
+    border-radius: 3px;
+  }
+
+  .hour {
+    height: 8px;
+    background: #000; 
+    z-index: 2;
+  }
+
+  .minute {
+    height: 5px;
+    background: #000; 
+    z-index: 3;
+  }
+
+  .second {
+    height: 3px;
+    background: red;  
+    z-index: 4; 
+  }
+
+  .center {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #000; 
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+  }
+</style>
+</head>
+<body>
+
+<div class="clock-wrapper">
+  <div class="hand hour" id="hour-hand"></div>
+  <div class="hand minute" id="minute-hand"></div>
+  <div class="hand second" id="second-hand"></div>
+  <div class="center"></div>
+</div>
+
+<script>
+function setClock() 
+ {
+    const now = new Date();
+    let h = now.getHours();
+    let m = now.getMinutes();
+    let s = now.getSeconds();
+
+        let hr_rotation = 30 * h + m / 2;
+        let min_rotation = 6 * m;
+        let sec_rotation = 6 * s;
+
+    document.getElementById("hour-hand").style.transform = `rotate(${hr_rotation}deg)`;
+    document.getElementById("minute-hand").style.transform = `rotate(${min_rotation}deg)`;
+    document.getElementById("second-hand").style.transform = `rotate(${sec_rotation}deg)`;
+}
+
+setInterval(setClock, 1000);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CallBack function</title>
+</head>
+<body>
+    <script>
+       function first(cb){
+  setTimeout(function(){
+    console.log("1st task done" );
+    cb();
+  }, 1000); 
+}
+
+function second(cb){
+  setTimeout(function(){
+    console.log("2nd task done");
+    cb();
+  }, 2000); 
+}
+
+function third(){
+  setTimeout(function(){
+    console.log("3rd task done");
+  }, 2000); 
+}
+//callback hell
+first(function(){
+  second(function(){
+    third();
+  });
+});
+
+
+//
+        function register(callback){
+            setTimeout(()=>{
+                console.log('Register End');
+                callback();
+
+            },1000)
+        }
+        function sendEmail(callback){
+            setTimeout(()=>{
+                console.log('Email End');
+                callback();
+
+            },2000)
+        }
+
+        function login(callback){
+            setTimeout(()=>{
+                console.log('login end');
+                callback();
+            },1000)
+        }
+
+        function getUserData(callback){
+            setTimeout(()=>{
+                console.log('Get User Data');
+                callback();
+
+            },1000)
+        }
+        function displayUserData(callback){
+            setTimeout(()=>{
+                console.log('user data displayed');
+                callback()
+            },1000)
+        }
+
+        // callback hell
+register(function(){
+    sendEmail(function(){
+        login(function(){
+            getUserData(function(){
+                displayUserData(function(){
+                    
+                });
+            });
+        });
+    });
+});
+
+
+
+
+
+    </script>
+    
+</body>
+</html>

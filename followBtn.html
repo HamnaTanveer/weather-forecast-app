@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Follow Button</title>
+
+<style>
+  body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#f2f2f2;
+    font-family:Arial;
+  }
+
+  button{
+    padding:12px 30px;
+    font-size:18px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    background:#1877f2;
+    color:white;
+  }
+
+  button.following{
+    background:#aaa;
+    color:black;
+  }
+</style>
+</head>
+
+<body>
+
+<button id="followBtn">Follow</button>
+
+<script>
+  let btn = document.getElementById("followBtn");
+  let isFollowing = false;
+
+  btn.addEventListener("click", function(){
+    if(isFollowing){
+      btn.innerText = "Follow";
+      btn.classList.remove("following");
+      isFollowing = false;
+    }else{
+      btn.innerText = "Following";
+      btn.classList.add("following");
+      isFollowing = true;
+    }
+  });
+</script>
+
+</body>
+</html>

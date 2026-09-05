@@ -1,0 +1,122 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Js Promise practice</title>
+</head>
+<body>
+    <script>
+        // regustt func
+       /*  function register(){
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    console.log('Register End');
+                    resolve();
+                },3000)
+                
+
+            })
+
+        }
+        //email func
+
+        function sendEmail(){
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    console.log('Email end');
+                    resolve();
+                },1000)
+            })
+        }
+
+        //login
+        function login(){
+            return new Promise((resolve, reject)=>{
+                setTimeout(()=>{
+                    reject('login reject');
+                    console.log('rejected');
+                },2000)
+            })
+        }
+       
+        //chaining
+         register()
+        .then(sendEmail)   
+        .then(login)
+           
+        .catch(function(error){
+            console.log('Error...', error);
+        });
+
+        //async awaits
+
+        async function authetication() {
+            try{
+                await register()
+                await sendEmail()
+                await login()
+            } catch(error) {
+                throw new Error();
+            }
+
+            
+        }
+        authetication().then(()=>{
+            console.log('all set ok');
+        }).catch((err)=>{
+            console.log("error!",err);
+        }); */
+
+
+        
+function step1(){
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+            console.log('Step 1 Done'); 
+            resolve();
+        }, 1000);
+    });
+}
+function step2(){
+    return new Promise((resolve)=>{
+        setTimeout(()=>{
+            console.log('Step 2 Done'); 
+            resolve();
+        },2000);
+    });
+}
+function step3(){
+    return new Promise((resolve, reject)=>{
+        setTimeout(()=>{
+            reject('Step 3 Failed');
+
+        },2500);
+    });
+}
+
+ async function practice1(){
+        try {
+            await step1();
+            await step2();
+            await step3();  
+            console.log('All steps completed..');  
+        } catch(error){
+           
+          throw new Error(error); 
+        }
+    }
+
+    // Call the async function
+    practice1()
+        .then(()=>{ 
+            console.log('All set ok...'); 
+        })
+        .catch((err)=>{ 
+            console.log('Error caught:', err);
+             });
+</script>
+</script>
+    
+    
+</body>
+</html>

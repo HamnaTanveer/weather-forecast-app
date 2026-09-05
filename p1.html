@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>To Do List App1 practice</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: Arial;
+    background: linear-gradient(to right,#1e90ff,#0072ff);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    width:800px;
+    background:#f2f2f2;
+    padding:30px;
+    border-radius:10px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.top-section{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.top-section input{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+}
+
+button{
+    padding:12px 18px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.clear-btn{
+    background:#1e90ff;
+    color:white;
+}
+
+.add-btn{
+    background:#4CAF50;
+    color:white;
+}
+
+.list-box{
+    background:linear-gradient(to right,#1e90ff,#0072ff);
+    padding:20px;
+    border-radius:8px;
+    height:300px;
+    overflow-y:auto;
+}
+
+#todo-list{
+    list-style:none;
+    padding:0;
+}
+
+#todo-list li{
+    background:#e6e6e6;
+    padding:10px;
+    border-radius:5px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.delete-btn{
+    background:#ff4d4d;
+    color:white;
+    margin-left:5px;
+}
+
+.edit-btn{
+    background:#1e90ff;
+    color:white;
+    margin-left:5px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>To Do List App</h1>
+
+    <div class="top-section">
+        <button class="clear-btn">Clear Storage</button>
+        <input type="text" id="todo-input" placeholder="Add or Update Your List">
+        <button class="add-btn" id="addBtn">Add</button>
+    </div>
+
+    <div class="list-box">
+        <ul id="todo-list"></ul>
+    </div>
+
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded",function(){
+
+    const input = document.getElementById("todo-input");
+    const addBtn = document.getElementById("addBtn");
+    const list = document.getElementById("todo-list");
+
+    loadTodos();
+
+    // Button Click
+    addBtn.addEventListener("click",function(){
+
+        if (input.value.trim() === ""){
+            alert('Please enter a task');
+            return;
+        }
+
+        alert("Task Added Successfully:");
+
+        const tasktext = input.value;
+
+        // Save in local storage
+        saveTodo(tasktext);
+
+        // Show on screen
+        createTodoElement(tasktext);
+
+        input.value="";
+    });
+
+    // Create & display
+    function createTodoElement(text){
+        const li = document.createElement("li");
+
+        li.innerHTML = `
+            <span>${text}</span>
+            <div>
+                <button class="delete-btn">Delete</button>
+                <button class="edit-btn">Edit</button>
+            </div>
+        `;
+
+        list.appendChild(li);
+    }
+
+    // Save data
+    function saveTodo(task){
+        const todos = JSON.parse(localStorage.getItem('todos')) || [];
+        todos.push(task);
+        localStorage.setItem("todos", JSON.stringify(todos));
+    }
+
+    // Load data
+    function loadTodos(){
+        const todos = JSON.parse(localStorage.getItem("todos")) || [];
+
+        todos.forEach(function(task){
+            createTodoElement(task);
+        });
+    }
+
+});
+
+</script>
+
+</body>
+</html>

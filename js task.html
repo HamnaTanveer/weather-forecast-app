@@ -1,0 +1,141 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS PRACTICE TASK</title>
+</head>
+<script>
+    //CHECH USER REQ
+
+    //Q'S#1
+
+    let username = prompt("Enter username:");
+
+if (username.length < 6) {
+    console.log("Invalid: Username must contain at least 6 characters");
+}
+
+else if (username.includes(" ")) {
+    console.log("Invalid: Username must not contain space");
+}
+
+else if (username.search(/[0-9]/) === -1) {
+    console.log("Invalid: Username must include at least one number");
+}
+
+else {
+    console.log("Valid Username");
+}
+
+//Q#2 VOVELS
+let word = prompt("Enter a word:");
+let count = 0;
+
+for (let i = 0; i < word.length; i++) {
+    let ch = word[i].toLowerCase();
+
+    if (ch === "a" || ch === "e" || ch === "i" || ch === "o" || ch === "u") {
+        count++;
+    }
+}
+console.log("Total vowels:" + count);
+
+//Q#3 PASSWORD
+let password = "admin123";
+let input = prompt("Enter password (or type 'exit'):");
+
+while (input !== password && input !== "exit") {
+    input = prompt("Wrong! Try again");
+}
+
+if (input === password) {
+    console.log("Access granted");
+} else {
+    console.log("Program Ended");
+}
+
+
+
+//Q#4 UPPER LOWER CASE
+
+let choice = prompt("Choose option 1=UPPERCASE, 2=lowercase, 3=Search a word");
+
+switch (choice) {
+  case "1":
+    let str1 = prompt("Enter string:");
+    console.log("UPPERCASE: " + str1.toUpperCase());
+    break;
+
+  case "2":
+    let str2 = prompt("Enter string:");
+    console.log("Lowercase: " + str2.toLowerCase());
+    break;
+
+  case "3":
+    let mainStr = prompt("Enter main string:");
+    let searchWord = prompt("Enter word to search:");
+    if (mainStr.includes(searchWord)) {
+      console.log(`"${searchWord}" found in the string.`);
+    } else {
+      console.log("Word not found");
+    }
+    break;
+
+  default:
+    console.log("Invalid choice!");
+}
+
+
+//Q#5  NON-REPEATING CHAR
+
+let words = prompt("Enter a word:");
+let firstNonRepeat = false;
+
+for (let i = 0; i < words.length; i++) {
+    let char = words[i];
+    let count = 0;
+
+    for (let j = 0; j < words.length; j++) {
+        if (words[j] === char) {
+            count++;
+        }
+    }
+    if (count === 1) { 
+        console.log("First non-repeating character is: " + char);
+        firstNonRepeat = true; 
+        break; 
+    }
+}
+if (!firstNonRepeat) {
+    console.log("No non-repeating character found");
+}
+
+//Q#6 EVEN OR ODD
+let n = Number(prompt("How many numbers do you want to enter?"));
+
+let even = 0;
+let odd = 0;
+
+for (let i = 0; i < n; i++) {
+    let num = Number(prompt("Enter number:"));
+
+    if (num < 0) {
+        continue;
+    }
+    if (num % 2 === 0) {
+        even++;
+    } else {
+        odd++;
+    }
+}
+
+console.log("Total Even Num Entered:" + even);
+console.log("Total Odd Num Entered:" + odd);
+
+
+
+</script>
+<body>
+    
+</body>
+</html>

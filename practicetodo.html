@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>practice ToDo</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #175c8f;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.container{
+    width:800px;     
+    max-width:95%;
+    background:#5e7589;
+    padding:15px;     
+    border-radius:12px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:20px;
+    color:white;
+}
+
+.top-bar{
+    background:#175c8f;
+    padding:15px;
+    border-radius:6px;
+    display:flex;
+    gap:15px;
+    align-items:center;
+}
+
+#todo-input{
+    flex:1;
+    padding:12px;
+    border:none;
+    border-radius:5px;
+    font-size:16px;
+    outline:none;
+    color:white;
+    background: #5e7589; 
+}
+#todo-input::placeholder{
+    color: #dcdcdc;
+}
+
+button{
+    padding:10px 18px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.clearBtn,.addBtn{
+    background:#5e7589;
+    color:white;
+}
+
+.list-box{
+    margin-top:20px;
+    background:#175c8f;
+    height:320px;
+    border-radius:6px;
+    padding:20px;
+    overflow-y:scroll;
+    margin:20px auto 0 auto;
+}
+
+#todo-list{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+#todo-list li{
+    background:#5e7589;
+    padding: 12px;
+    border-radius:5px;
+    display:flex;
+    align-items:center;
+    margin-bottom:10px;
+    color: white;
+    justify-content: space-between;
+}
+
+
+#todo-list button {
+    background: #175c8f;
+    color: white;
+     padding: 5px 10px;;
+    border: none;
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+#todo-list li .edit {
+    margin-left: auto;   
+}
+
+
+
+
+</style>
+</head>
+
+<body>
+<div class="container">
+    <h1>To Do List App</h1>
+
+    <div class="top-bar">
+        <button class="clearBtn" id="clearBtn">Clear Storage</button>
+        <input type="text" id="todo-input" placeholder="Add or Update Your List">
+        <button class="addBtn" id="addBtn">Add</button> 
+    </div>
+
+    <div class="list-box">
+        <ul id="todo-list"></ul>
+    </div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const input = document.getElementById("todo-input");
+    const addBtn = document.getElementById("addBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const list = document.getElementById("todo-list");
+
+    let selectorIndex= null;
+    let selectorText = "";
+
+    loadTodos();
+
+    // btn click
+    addBtn.addEventListener("click", function (){
+         console.log("Function runs");
+
+
+       
+     const taskText = input.value;
+     if(taskText===""){
+        alert("please enter a task");
+        return;
+     }
+     //check if new item exist in my list or not
+     const todos = JSON.parse(localStorage.getItem("todos")) || [];
+     const matched = todos.filter((item)=>{
+       /*  item.toLowerCase() === taskText.toLowerCase() */
+        if( item == taskText){
+            return true
+        }
+
+     })
+     if (matched.length > 0){
+        alert('already Exists!')
+        return;
+     }
+     
+     if(selectorIndex!= null){
+        const todos = JSON.parse(localStorage.getItem("todos")) || [];
+        
+
+        todos[selectorIndex] = taskText;
+         localStorage.setItem("todos", JSON.stringify(todos));
+         loadTodos();
+
+      } else{ 
+        saveTodo(taskText);
+        input.value = "";
+        loadTodos();
+         alert("Task Added Successfully");
+
+     }
+     selectorIndex = null;
+     addBtn.innerText = 'Add';
+     input.value="";
+
+        
+    });
+     function editRow(text,index){
+        selectorIndex = index;
+        selectorText = text;
+        input.value= text;
+        addBtn.innerText='Update';
+    }
+    
+     
+
+    // Function create and display
+   
+       function createTodoElement(text , index) {
+    const li = document.createElement("li"); 
+
+    const span = document.createElement('span');
+    span.innerText= text;
+
+    const button = document.createElement('button');
+    button.className = 'edit';
+    button.innerText = 'Edit';
+
+    
+    const deletebutton = document.createElement('button');
+    deletebutton.className = 'delete-btn';
+    deletebutton.innerText = 'Delete';
+
+    
+    li.appendChild(span);
+    li.appendChild(button);
+     li.appendChild(deletebutton);
+     list.appendChild(li); 
+
+ //edit btn
+     button.addEventListener('click',function(e){
+        editRow(text,index)
+     });
+     //del btn
+      deletebutton.addEventListener('click',function(e){
+         deletelistItem(index) 
+        })
+
+          //clearr  Btn
+    clearBtn.addEventListener("click", function () {
+    clearTodos();
+    }); 
+
+    }
+   
+
+// delt function 
+function deletelistItem(Index){
+
+const todos = JSON.parse(localStorage.getItem("todos")) || [];
+   
+    const nameToBeDeleted = todos[Index];
+    const newTodos = [];
+
+    todos.forEach(function(item){
+
+        if(item !== nameToBeDeleted){
+        newTodos.push(item);
+        }
+    });
+    ///  save updated list in localStorage
+    localStorage.setItem("todos", JSON.stringify(newTodos));
+    loadTodos();
+}
+
+
+
+    // function save data
+    function saveTodo(task) {
+        const todos = JSON.parse(localStorage.getItem("todos")) || [];
+       todos.push(task);
+        localStorage.setItem("todos", JSON.stringify(todos));
+    }
+
+    // func load data
+    function loadTodos() {
+        list.innerHTML ='';
+        const todos = JSON.parse(localStorage.getItem("todos")) || [];
+        todos.forEach(function (task, index) {
+         createTodoElement(task,index);
+        });
+    }
+
+    // function Clear Storage
+    function clearTodos(){
+    localStorage.removeItem("todos");  
+    loadTodos();          
+}
+
+    
+});
+</script>
+</body>
+</html>

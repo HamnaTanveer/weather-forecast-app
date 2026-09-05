@@ -1,0 +1,227 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>practicee</title>
+    <style>
+        body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial;
+  background-size: cover;
+   background: url('bg.jpg') no-repeat center center/cover;
+    transition: background-image  1s ease-out;
+  
+}
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg) center/cover no-repeat;
+
+  transition: opacity   1s ease-out;
+  opacity: 2;
+  z-index: -2;
+}
+
+/* 🌫️ MIST / BLACK OVERLAY */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45); /* black mist */
+  z-index: -1;
+}
+
+
+/* main box */
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+  text-align: center;
+}
+
+/* search */
+.search {
+  display: flex;
+  gap: 10px;
+ 
+}
+
+input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: lightgray;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  background: grey;
+  cursor: pointer;
+  background-color: lightgray;
+}
+
+/* slide box */
+.weatherBox {
+  background: #ddd;
+  margin-top: 15px;
+  border-radius: 10px;
+
+  max-height: 0;
+  overflow: hidden;
+
+  opacity: 0;
+  transform: translateY(-10px);
+
+  transition: all 0.6s ease-in-out;
+  padding: 0 10px;
+}
+
+
+
+/* SHOW */
+.weatherBox.show {
+  max-height: 400px;
+  opacity: 1;
+  transform: translateY(0);
+  padding: 15px;
+}
+
+    </style>
+</head>
+
+    <body>
+
+<div class="container">
+
+  <div class="search">
+    <input type="text" placeholder="Type City" id="cityInput">
+    <button id="searchBtn">Search</button>
+  </div>
+
+  <!-- Slide Box -->
+  <div class="weatherBox" id="weatherBox">
+
+    <h1 id="cityName"></h1>
+    <h4 id="time"></h4i>
+    <h3 id="date"></h3>
+
+    <h1 id="temp"></h1>
+    <h3 id="minmax"></h3>
+    <h3 id="condition"></h3>
+
+  </div>
+
+</div>
+
+
+
+    <script>
+
+let btn = document.getElementById("searchBtn");
+
+
+btn.addEventListener("click" , getWeather);
+
+
+function getWeather() {
+let city = document.getElementById("cityInput").value;
+let apiKey = "2617f85eaa19ab7f83f7ff4be1d06cd4";
+
+  
+  fetch("https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + apiKey + "&units=metric")
+    .then(res => res.json())
+    .then(data => {
+
+      displayData(data);
+
+    });
+}
+
+
+function displayData(data) {
+let city = data.name + ", " + data.sys.country;
+
+let temp = data.main.temp;
+let min = data.main.temp_min;
+let max = data.main.temp_max;
+
+let weather = data.weather[0].main;
+  // time or  date show
+  /* let now = new Date();
+  let time = now.toLocaleTimeString();
+  let date = now.toDateString();
+  */
+
+let day = now.getDate();
+let month = now.toLocaleString('en-US', { month: 'long' });
+let year = now.getFullYear();
+let weekday = now.toLocaleString('en-US', { weekday: 'long' });
+
+let date = day + " " + month + " [" + weekday + "] " + year;
+ 
+ 
+
+  document.getElementById("cityName").innerText = city;
+  document.getElementById("time").innerText = time;
+  document.getElementById("date").innerText = date;
+  document.getElementById("temp").innerText = temp + "°C";
+  document.getElementById("minmax").innerText = `${min}°C (min) / ${max}°C (max)`;
+  document.getElementById("condition").innerText = weather;
+
+ // slide  ko show
+let box = document.getElementById("weatherBox");
+box.classList.add("show");
+
+  // background change
+
+  changeBG(weather);
+
+  
+}
+
+
+// function bnaya hai
+function changeBG(weather) {
+
+  let body = document.body;
+
+  if (weather == "Clear") {
+    body.style.backgroundImage = "url('clearWheather.jpg')";
+  }
+  else if (weather == "Clouds") {
+    body.style.backgroundImage = "url('cloudyWeather.jpg')";
+  }
+  else if (weather == "Rain") {
+    body.style.backgroundImage = "url('rainWeather.jpg')";
+  }
+  else if (weather == "Haze") {
+    body.style.backgroundImage = "url('hazeWeather.jpg')";
+  }
+  else if (weather == "Dust"){
+    body.style.backgroundImage = "url('dustWeather.jpg')";
+  }
+   else if (weather == "Smoke"){
+    body.style.backgroundImage = "url('smokewallpaper.jpg')";
+  }
+  body.style.backgroundSize = "cover";
+}
+
+    </script>
+    
+</body>
+</html>

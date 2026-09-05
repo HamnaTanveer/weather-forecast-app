@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SignUp Form</title>
+<style>
+/* --- Reusing Original SignIn Styles --- */
+*{
+    margin:0;
+     padding:0;
+      box-sizing:border-box; 
+      font-family:Arial;
+    }
+body{
+    background:url("picc.jpg"); 
+    background-size:cover; 
+    background-position:center; 
+    height:100vh;
+     display:flex;
+      justify-content:center;
+       align-items:center;
+    }
+.background{
+    background:rgba(0, 0, 0, 0.6);
+     width:100%; 
+     height:100vh;
+      display:flex;
+       justify-content:center; 
+       align-items:center;
+    }
+.container{
+    text-align:center;
+     color:white; 
+     width:600px; 
+     padding: 20px;
+     margin-top: 30px;
+    }
+h1{
+    margin-bottom:10px;
+}
+
+.input-group{
+    display: flex; 
+    gap: 15px; 
+    margin-bottom: 15px;
+}
+.left-col, .right-col{
+    flex: 1; 
+    display: flex;
+     flex-direction: column;
+      align-items: center;
+    }
+input{
+    width:100%; 
+    padding:12px; 
+    margin:10px 0;
+     background:transparent;
+      border:1px solid white;
+       border-radius:20px;
+        color:white;
+    }
+input::placeholder{
+    color:white;
+}
+.radio-group{
+display:flex;
+gap:15px;
+margin-top:10px;
+font-size:14px;
+align-items:center;
+}
+
+.radio-group label{
+cursor:pointer;
+}
+
+.gender p{
+margin:0;
+font-size:14px;
+margin: left;
+}
+.forget{
+    font-size:13px;
+     margin-bottom:25px;
+      text-align: right;
+    }
+
+  
+.back-link{
+display:flex;
+align-items:center;
+justify-content:center;
+width:50%;
+height:40px;
+background:white;
+color:black;
+border-radius:30px;
+text-decoration:none;
+/* font-weight:bold; */
+margin-left: 55%;
+margin-top: -45px;
+}
+.back-link:hover{
+background:black;
+color:white;
+}
+
+
+
+.terms{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:14px;
+margin-top:40px;
+cursor:pointer;
+height: 40px;
+margin-top: 5px;
+}
+
+.terms input{
+width:15px;
+height:15px;
+cursor:pointer;
+}
+
+
+   
+#signupBtn{
+    display: block;          
+    width: 50%;              
+    height: 40px;           
+    margin-top: 0;         
+    margin-left: 0;         
+    padding: 0;
+    background: rgb(224, 97, 28);  
+    border: none;
+    border-radius: 30px;    
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    line-height: 40px;       
+    cursor: pointer;
+}
+
+
+
+
+</style>
+</head>
+<body>
+<div class="background">
+    <div class="container">
+        <h1>Sign Up Form</h1>
+       
+        
+        <div class="input-group">
+          
+            <div class="left-col">
+                <input type="text" id="f-name" placeholder="First Name">
+                <input type="text" id="l-name" placeholder="Last Name">
+                <input type="email" id="gmail" placeholder="Gmail">
+               
+                <input type="date" id="dob" placeholder="Date of Birth">
+                <div class="forget" style="text-align: left; margin-top: 10px;">
+                    <label class="terms">
+               <input type="radio" name="terms" required>
+             I agree to the Terms of User
+              </label>
+                      </div>
+            </div>
+            
+            <div class="right-col">
+               <input type="text" id="username" placeholder="Username">
+                <input type="password" id="password" placeholder="Password">
+                <input type="password" id="confirm-password" placeholder="Confirm Password">
+
+               <div class="gender">
+              <p>Gender:</p>
+              <div class="radio-group">
+                <input type="radio" name="gender" value="male"> Male
+              <input type="radio" name="gender" value="female"> Female
+            <input type="radio" name="gender" value="transgender"> Transgender
+            </div>
+
+            </div>
+
+            </div>
+        </div>
+
+       <button id="signupBtn">Sign Up</button>
+        <a href="signInForm.html" class="back-link">Back to Sign In Page</a>
+    </div>
+</div>
+
+
+<script>
+    // Get values from prompts
+    const firstName = prompt("Enter your First Name:");
+    const lastName = prompt("Enter your Last Name:");
+    const dob = prompt("Enter your Date of Birth:");
+  const username = prompt("Enter your Username:");
+    const gmail = prompt("Enter your Gmail:");
+    const password = prompt("Enter your Password:");
+    const confirmPassword = prompt("Enter Confirm Password:");
+
+    // Get input elements
+    const firstInput = document.getElementById("f-name");
+    const lastInput = document.getElementById("l-name");
+    const dobInput = document.getElementById("dob");
+   const usernameInput = document.getElementById("username");
+    const gmailInput = document.getElementById("gmail");
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirm-password");
+
+    
+     firstInput.value = firstName;
+    lastInput.value = lastName;
+     dobInput.value = dob;
+   usernameInput.value = username;
+     gmailInput.value = gmail;
+    passwordInput.value = password;
+     confirmPasswordInput.value = confirmPassword;
+
+    
+
+// Get Sign Up button
+    const btnsignup = document.getElementById("signupBtn");
+
+    btnsignup.addEventListener("click", function(e){
+      
+      
+        const usernameInput = document.getElementById("username").value;
+        const passwordInput = document.getElementById("password").value;
+        const gmailInput = document.getElementById("gmail").value;
+        const firstInput = document.getElementById("f-name").value;
+        const lastInput = document.getElementById("l-name").value;
+        const dobInput = document.getElementById("dob").value;
+
+
+        if(usernameInput && passwordInput){
+
+            alert("Sign Up Successfully!");
+
+             window.location.href = "signInForm.html"; 
+            return;
+        }
+    });
+
+</script>
+</body>
+</html>

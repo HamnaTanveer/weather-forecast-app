@@ -1,0 +1,93 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    //calculate the factorial number
+   function factorial(n){
+    let result = 1;
+
+    for (let i =1; i<=n; i++){
+         result = result * i;
+    }
+    return result;
+
+   }
+   console.log(factorial(6));
+
+   //counts how many times a num appear
+
+   function countOccurences(num, arr){
+    let count = 0;
+
+    for (let i = 0; i < arr.length; i++){
+        if(arr[i] === num){
+            count++;
+        }
+    }
+    return count;
+}
+
+console.log(countOccurences(2, [1,2,3,2,2,4]));
+
+
+   //an array of numbers, count how many times each number appears in the array and print the result
+   
+   let nums = [1,2,3,4,3,2,1,6,5,66,6];
+
+let counts = {};
+
+for (let num of nums){
+    counts[num] = (counts[num] || 0) + 1;
+}
+
+// print same format
+for (let key in counts){
+    console.log(key + ":" + counts[key]);
+}
+
+//map
+
+let Nums = [1,2,3,4,3,2,1,6,5,66,6];
+
+let map = new Map();
+
+for (let num of nums) {
+  map.set(num, (map.get(num) || 0) + 1);
+}
+
+for (let [key, value] of map) {
+  console.log(key + ":" + value);
+}
+
+
+function menuClick(){
+  item1.style.left='51%';
+  item2.style.left='51%';
+  item3.style.left='51%';
+  item1.style.opacity='1';
+  item2.style.opacity='1';
+  item3.style.opacity='1';
+  img.classList.add('img-dim');
+}
+
+function resetClick(){
+  item1.style.left='70%';
+  item2.style.left='70%';
+  item3.style.left='70%';
+  item1.style.opacity='0';
+  item2.style.opacity='0';
+  item3.style.opacity='0';
+  img.classList.remove('img-dim');
+  reset.classList.add('btn-dim');
+  setTimeout(()=>reset.classList.remove('btn-dim'),400);
+}
+
+
+</script>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Menu Option</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial;
+}
+body{
+  background:#eef2f7;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:40px;
+}
+
+.container{
+  position:relative;
+  width:240px;
+  height:300px;
+}
+#center-img{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  
+}
+#center-img img{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  cursor:pointer;
+  transition:.4s
+}
+#center-img:hover{
+  opacity:0.8 !important;
+}
+.menu-item{
+  position:absolute;
+  top:50%;
+  left:100%;   
+  width:110px;
+  height:90px;
+  background:#14b8a6;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+ clip-path: polygon(65% 0%, 0% 65%, 100% 100%);
+  opacity:0;
+  z-index:0.3; 
+  font-size: 13px;  
+  overflow: hidden;
+}
+
+.menu-item:hover{
+  cursor:pointer;
+}
+
+
+.menu-item i{
+  font-size:22px;
+  margin-bottom:4px;
+}
+
+.item1{
+  transform:translateY(-140%) rotate(-35deg);
+  transition-delay:0.05s;
+}
+.item2{
+  transform:translateY(-50%) translateX(40px) rotate(0deg);
+  transition-delay:0.1s;
+}
+.item3{
+  transform:translateY(40%) rotate(35deg);
+  transition-delay:0.15s;
+}
+
+
+.reset-btn{
+  position:absolute;
+  bottom:-35px;      
+  left:50%;
+  transform:translateX(-50%);
+  padding:12px 35px;
+  border:none;
+  background:#0d9488;
+  color:#fff;
+  font-size:18px;
+  cursor:pointer;
+  transition:0.4s;
+}
+
+
+
+.reset-btn:hover{
+  background:black;
+   opacity:0.7 !important;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="menu-item item1" id="item1">
+    <i class="fa-regular fa-lightbulb"></i>News
+  </div>
+  <div class="menu-item item2" id="item2">
+    <i class="fa-solid fa-chart-line"></i>Trade
+  </div>
+  <div class="menu-item item3" id="item3">
+    <i class="fa-regular fa-user"></i>Profile
+  </div>
+
+  <div id="center-img" onclick="menuClick()">
+  <img id="mainImg" src="image.jpg">
+  </div>
+
+  <button class="reset-btn" onclick="resetClick()">Reset</button>
+
+</div>
+
+
+<script>
+
+var img = document.getElementById('mainImg');
+var reset = document.getElementById('resetBtn');
+var item1 = document.getElementById('item1');
+var item2 = document.getElementById('item2');
+var item3 = document.getElementById('item3');
+
+
+
+function menuClick(){
+  item1.style.left='51%';
+  item2.style.left='51%';
+  item3.style.left='51%';
+  item1.style.opacity='1';
+  item2.style.opacity='1';
+  item3.style.opacity='1';
+ 
+}
+
+function resetClick(){
+  item1.style.left='72%';
+  item2.style.left='72%';
+  item3.style.left='72%';
+  item1.style.opacity='0';
+  item2.style.opacity='0';
+  item3.style.opacity='0';
+  
+ 
+}
+</script>
+
+</script>
+
+</body>
+</html>

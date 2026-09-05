@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>My Calendar</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* ===== Background ===== */
+body{
+    min-height: 100vh;
+    height: 100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background: linear-gradient(135deg,#c3cfe2,#f5d0e6,#ffd6a5);
+    padding: 15px;
+}
+
+/* ===== Wrapper ===== */
+.wrapper{
+    width: 100%;
+    max-width: 380px;
+    text-align:center;
+}
+
+/* ===== Heading ===== */
+.title{
+    font-size: 32px;
+    font-weight:bold;
+    margin-bottom:20px;
+    letter-spacing:2px;
+}
+
+/* ===== Calendar box ===== */
+.calendar{
+    width: 100%;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius:18px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+    padding:22px;
+    transition:0.3s;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+#monthYear{
+    font-weight:bold;
+    font-size:19px;
+    color:#444;
+}
+
+/* Buttons */
+.header button{
+    width:40px;
+    height:40px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:16px;
+    color:white;
+    background: linear-gradient(135deg,#7b68ee,#ff9a9e);
+    transition:0.2s;
+}
+
+.header button:hover{
+    transform:scale(1.1);
+}
+
+/* ===== Days grid ===== */
+.days,
+.dates{
+    display:grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align:center;
+}
+
+.days div{
+    font-weight:bold;
+    padding:8px 0;
+    color:#666;
+}
+
+
+.dates div{
+    padding:10px 0;
+    margin:4px;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.dates div:hover{
+    background:#eee;
+    transform:scale(1.05);
+}
+
+/* Today highlight */
+.today{
+    background: linear-gradient(135deg,#7b68ee,#ff9a9e);
+    color:white;
+    font-weight:bold;
+}
+
+@media (max-width: 400px) {
+    .calendar {
+        padding: 12px;
+    }
+    
+    .title {
+        font-size: 26px;
+        margin-bottom: 15px;
+    }
+
+    #monthYear {
+        font-size: 16px;
+    }
+
+    .header button {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+
+    .dates div {
+        padding: 8px 0;
+        margin: 2px;
+        font-size: 14px;
+    }
+    
+    .days div {
+        font-size: 13px;
+        padding: 6px 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+    <h1 class="title">My Calendar</h1>
+
+    <div class="calendar">
+        <div class="header">
+            <button id="prev">⟵</button>
+            <div id="monthYear"></div>
+            <button id="next">⟶</button>
+        </div>
+
+        <div class="days">
+            <div>Sun</div><div>Mon</div><div>Tue</div>
+            <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+        </div>
+
+        <div class="dates" id="dates"></div>
+    </div>
+</div>
+
+<script>
+const monthYear = document.getElementById("monthYear");
+const datesContainer = document.getElementById("dates");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+
+let date = new Date();
+
+function renderCalendar() {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDate = new Date(year, month + 1, 0).getDate();
+
+    const today = new Date();
+
+    const months = [
+        "January","February","March","April","May","June",
+        "July","August","September","October","November","December"
+    ];
+
+    monthYear.innerText = `${months[month]} ${year}`;
+
+    datesContainer.innerHTML = "";
+
+    for(let i=0; i<firstDay; i++){
+        datesContainer.innerHTML += "<div></div>";
+    }
+
+    for(let d=1; d<=lastDate; d++){
+        const dayDiv = document.createElement("div");
+        dayDiv.innerText = d;
+
+        if(
+            d === today.getDate() &&
+            month === today.getMonth() &&
+            year === today.getFullYear()
+        ){
+            dayDiv.classList.add("today");
+        }
+
+        datesContainer.appendChild(dayDiv);
+    }
+}
+
+prevBtn.onclick = () => {
+    date.setMonth(date.getMonth() - 1);
+    renderCalendar();
+};
+
+nextBtn.onclick = () => {
+    date.setMonth(date.getMonth() + 1);
+    renderCalendar();
+};
+
+renderCalendar();
+</script>
+
+</body>
+</html>

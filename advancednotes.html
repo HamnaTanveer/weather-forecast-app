@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Notes</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: skyblue;
+    display: flex;
+    flex-direction: column;  
+    align-items: center;
+}
+
+#addBtn {
+    margin: 20px 0;
+    padding: 12px 25px;
+    background: lightgreen;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color:white;
+}
+
+#notesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    justify-content: center;
+}
+
+.note {
+    width: 300px;
+    min-height: 250px;
+    background: white;
+    padding: 10px;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-size: 16px;
+  
+    outline: none; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; 
+}
+
+.icons-container {
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    height: 35px;
+    background: lightgreen;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+    padding: 0 5px;
+    z-index: 2;
+}
+
+.icons-container i {
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.note.disabled {
+    background: #a7a5a5;
+}
+
+.note-text {
+    width: 100%;
+    height: 100%;
+    padding-top: 40px; 
+    outline: none;
+}
+</style>
+</head>
+<body>
+
+<button id="addBtn">+ Add Note</button>
+<div id="notesContainer"></div>
+
+<script>
+
+const addBtn = document.getElementById("addBtn");
+const notesContainer = document.getElementById("notesContainer");
+
+
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+// Function to create note element
+function createNoteItem(noteObj, index){
+    const note = document.createElement("div");
+    note.className = "note";
+    // ICONS CONTAINER
+
+    const iconsContainer = document.createElement("div");
+    iconsContainer.className = "icons-container";
+
+    const editIcon = document.createElement("i");
+    editIcon.className = "fa-solid fa-pen-to-square";
+
+    const deleteIcon = document.createElement("i");
+    deleteIcon.className = "fa-solid fa-trash";
+
+    iconsContainer.appendChild(editIcon);
+    iconsContainer.appendChild(deleteIcon);
+
+    const noteText = document.createElement("div");
+    noteText.className = "note-text";
+    noteText.contentEditable = true;
+   
+
+    note.appendChild(iconsContainer);
+    note.appendChild(noteText);
+    notesContainer.appendChild(note);
+
+    // DELETE NOTE 
+    deleteIcon.addEventListener("click", function() {
+        notes.splice(index, 1);
+        localStorage.setItem("notes", JSON.stringify(notes));
+        loadNotes();
+    });
+
+    // EDIT TOGGLE
+   
+
+    let editable = false;
+
+editIcon.addEventListener("click", function() {
+    if(editable) {
+        // Disable edit
+        editable = false;
+        note.classList.add("disabled");
+        noteText.contentEditable = "false";
+    } else {
+        // Enable edit
+        editable = true;
+        note.classList.remove("disabled");
+        noteText.contentEditable = "true";
+    }
+
+   /*  noteObj.text = noteText.innerText;   
+    localStorage.setItem("notes", JSON.stringify(notes)); */ 
+});
+//text save
+noteText.addEventListener("input", function() {
+    noteObj.text = noteText.innerText; 
+    localStorage.setItem("notes", JSON.stringify(notes));
+});
+}
+
+// LOAD NOTES
+function loadNotes(){
+    notesContainer.innerHTML = "";
+    notes.forEach(function(noteObj, index){
+        createNoteItem(noteObj, index);
+    });
+}
+
+// ADD NOTES
+
+addBtn.addEventListener("click", function(){
+let noteObj = new Object();
+noteObj.text = "";
+
+notes.push(noteObj);
+     localStorage.setItem("notes", JSON.stringify(notes));
+    loadNotes();
+
+});
+</script>
+
+</body>
+</html>

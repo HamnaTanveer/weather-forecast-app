@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Form</title>
+
+<style>
+body{
+    font-family: Arial;
+    background-color: whitesmoke;
+}
+
+.form-box{
+    width: 300px;
+    margin: 80px auto;
+    padding: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+h2{
+    text-align: center;
+}
+
+input{
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="form-box">
+
+<h2>Student Form</h2>
+
+<label for="f-name">First Name:</label><br>
+<input type="text" id="f-name">
+
+<label for="l-name">Last Name:</label><br>
+<input type="text" id="l-name">
+
+<label for="dob">Date Of Birth:</label><br>
+<input type="date" id="dob">
+
+<label for="subject">Subject:</label><br>
+<input type="text" id="subject">
+</div>
+
+<script>
+
+// through Prompt
+const firstName = prompt("Enter your First Name:");
+const lastName = prompt("Enter your Last Name:");
+const dob = prompt("Enter your Date of Birth:");
+const subject = prompt("Enter your Subject:");
+
+
+const firstInput = document.getElementById("f-name");
+const lastInput = document.getElementById("l-name");
+const dobInput = document.getElementById("dob");
+const subjectInput = document.getElementById("subject");
+
+
+firstInput.value = firstName;
+lastInput.value = lastName;
+dobInput.value = dob;
+subjectInput.value = subject;
+
+</script>
+
+</body>
+</html>

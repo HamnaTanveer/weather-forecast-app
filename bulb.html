@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>JS Bulb Project</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#121212;
+    transition:0.4s;
+}
+
+/* card */
+.container{
+    background:#1e1e1e;
+    padding:40px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.6);
+}
+
+/* bulb image */
+#bulb{
+    width:200px;
+    transition:0.3s;
+}
+
+/* glow when ON */
+.glow{
+    filter: drop-shadow(0 0 35px yellow);
+}
+
+/* button */
+button{
+    margin-top:25px;
+    padding:12px 30px;
+    border:none;
+    border-radius:10px;
+    font-size:16px;
+    background:#ffd54f;
+    cursor:pointer;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2 style="color:white;">💡Bulb Switch</h2>
+
+    <!-- Image -->
+    <img src="off.png" id="bulb">
+
+    <br>
+
+    <button id="btn">Turn ON</button>
+</div>
+
+<script>
+const bulb = document.getElementById("bulb");
+const btn = document.getElementById("btn");
+const body = document.body;
+
+let isOn = false;
+
+btn.addEventListener("click", () => {
+
+    if(!isOn){
+        bulb.src = "on.png";
+        bulb.classList.add("glow");
+        btn.innerText = "Turn OFF";
+        body.style.background = "#2b2b2b";
+        isOn = true;
+    }
+    else{
+        bulb.src = "off.png";
+        bulb.classList.remove("glow");
+        btn.innerText = "Turn ON";
+        body.style.background = "#121212";
+        isOn = false;
+    }
+
+});
+</script>
+
+</body>
+</html>

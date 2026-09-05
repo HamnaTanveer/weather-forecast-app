@@ -1,0 +1,107 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom Practice</title>
+</head>
+<style>
+    #box1 {
+      width: 50%;
+      height: 250px;
+      border: 2px solid black;
+      margin-top: 20px;
+    }
+
+    .btn{
+      padding: 10px;
+      margin-top:30px;
+    }
+
+    #box1 img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+</style>
+<body>
+    <p id = "demo" class="box">Hello</p>
+    <p class = "box">Hi</p>
+    <p class ="box">Hamna</p>
+    
+    <p id="text">Hello</p>
+  <button onclick="changeText()">Click Me</button>
+
+  <div class="btn">
+
+<button onclick="redColor()">Red</button>
+  <button onclick="greenColor()">Green</button>
+  <button onclick="yellowColor()">Yellow</button>
+  <button onclick="showImg()">src</button>
+
+  <div id="box1"></div>
+</div>
+
+
+</body>
+<script>
+var demo = document.getElementById('demo')
+console.log(demo);
+
+//by class
+var demoClass = document.getElementsByClassName('box');
+console.log(demoClass);
+
+//modern selectors
+console.log(document.querySelector('.box'));
+console.log(document.querySelectorAll('p'));
+
+//button
+ let txt = document.getElementById("text");
+console.log(txt);
+function changeText() {
+txt.innerHTML = "World"
+    }
+
+
+///TASK
+
+
+let container = document.getElementById("box1");
+    console.log(container);
+
+    
+
+    function redColor() {
+      container.style.backgroundColor = "red";
+      container.innerHTML = "";
+    }
+
+    function greenColor() {
+      container.style.backgroundColor = "green";
+      container.innerHTML = "";
+    }
+
+    function yellowColor() {
+      container.style.backgroundColor = "yellow";
+      container.innerHTML = "";
+    }
+
+    function showImg() {
+      container.style.backgroundColor = "";
+      container.innerHTML = "<img src='about-2.jpg'>";
+    }
+
+
+
+
+ var display = document.querySelector("#display");
+
+    var btnClear = document.querySelector(".clear");
+    var btnCE = document.querySelector(".ce");
+    var btnEqual = document.querySelector(".equal");
+    var numButtons = document.querySelectorAll(".num");
+    var opButtons = document.querySelectorAll(".mul, .div, .plus, .minus, .percent, .dot");
+
+
+</script>
+</html>

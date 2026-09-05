@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> async Fetch Practice</title>
+  <style>
+ body {
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #f9fafb;
+}
+
+.cards-container {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.conatinertitle {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color:black;
+}
+
+.conatinertext {
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.usercards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.card {
+ background: #fff;
+  border-radius: 15px;
+  width: 220px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition:all  0.2s ease;
+  overflow: hidden; 
+}
+
+.card:hover {
+  transform: translateY(-4px);
+   box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transform: scale(1.05);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+    transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+
+
+.card h2 {
+  font-size: 18px;
+  margin: 10px 0 5px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.commentsContainer {
+  background: #fff;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.tag {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.cmntTitle {
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+.cmntP {
+  color: #777;
+  margin-bottom: 30px;
+}
+
+.commntcard {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.commentcard {
+  background: #f4f6f8;
+  width: 250px;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.commentcard p {
+  font-size: 14px;
+  color: #444;
+  margin: 10px 0;
+}
+
+.commentcard img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 10px 0;
+}
+
+.commentcard h5 {
+  margin: 5px 0;
+}
+
+.commentcard h6 {
+  color: #777;
+  font-size: 12px;
+}
+  </style>
+</head>
+<body>
+  <!--Cards-Container-->
+    <div class="cards-container">
+        <h1 class="conatinertitle">View Cards</h1>
+        <p class="conatinertext">Find the Perfect Card For You</p>
+        <div class="usercards" id="user-cards"></div>
+    </div>
+
+
+    <!-- commnts -->
+    <div class="commentsContainer">
+        <h6 class="tag">Customers Love</h6>
+        <h1 class="cmntTitle">What Our Customers Say</h1>
+        <p class="cmntP">Join thousands of happy customers who have made Stride their go-to footwear brand</p>
+
+        <div class="commntcard" id="cmnt-cards"></div>
+    </div>
+
+  <script>
+   async function fetchcards() {
+    try {
+        // 3noo APIs ko aik sathh call kia ha 
+        const [resUsers, resPosts, resPhotos] = await Promise.all([
+
+            fetch("https://jsonplaceholder.typicode.com/users"),
+            fetch("https://jsonplaceholder.typicode.com/posts"),
+            fetch("https://jsonplaceholder.typicode.com/photos")
+
+        ]);
+        const dataUsers = await resUsers.json(); 
+        const dataPosts = await resPosts.json();
+        const dataPhotos = await resPhotos.json();
+
+        const userCards = document.getElementById("user-cards");
+
+        dataUsers.forEach(user => {
+            const card = document.createElement("div");
+            card.className = "card";
+
+            const posts = dataPosts.find(posts => posts.userId === user.id);
+            const photos = dataPhotos.find(photos => photos.albumId === user.id);
+            const username = user.username;
+
+            
+            const imgUrl=`https://picsum.photos/seed/${user.id}/200/200`;
+            const title = posts.title;
+            console.log(username, imgUrl, title);
+            card.innerHTML = `
+             <img src='${imgUrl}'></img>
+           <h2 style="margin: 12px 0px 3px 6px;">${username}</h2>
+                <p style="margin: 10px 0px 0px 10px;">${title}</p> `
+            userCards.appendChild(card);
+        })
+    }
+
+    catch (error) {
+        console.log(error);
+
+    }
+}
+
+async function fetchCmnt() {
+
+try {
+    
+    const rescomnt= await fetch("https://jsonplaceholder.typicode.com/comments");
+    const cmntdata=await rescomnt.json();
+    
+    const cmntcard=document.getElementById("cmnt-cards");
+    
+    cmntdata.slice(0,3).forEach(comments=>{
+        const box=document.createElement("div1");
+    
+        box.className="commentcard";
+        const Comment=comments.body;
+        const Name=comments.name;
+        const email=comments.email;
+        const imgcmnt="https://picsum.photos/id/22/200/200";
+        console.log(Comment,Name,email);
+    
+        box.innerHTML=`
+       
+        <p>" ${Comment} "</p>
+        <img src="${imgcmnt}"</img>
+        <h5>${Name}</h5>
+        <h6>${email}</h6>
+        
+        `
+        cmntcard.appendChild(box);
+    
+    })
+    
+} catch (error) {
+    console.log(error);
+    
+}
+
+}
+fetchcards();
+fetchCmnt();
+  </script>
+</body>
+</html>

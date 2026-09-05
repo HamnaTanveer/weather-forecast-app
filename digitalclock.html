@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Clock</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000; 
+  }
+
+  .clock-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .clock-container {
+    position: relative;
+    width: 600px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    flex-direction: column;
+  }
+
+  .circle1 {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    background: rgb(38, 83, 172); 
+    border-radius: 50%;
+    left: -50px;
+    bottom: -50px; 
+    z-index: 0;
+  }
+
+  .circle2 {
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    background: #ff69b4; 
+    border-radius: 50%;
+    right: -50px; 
+    top: -50px; 
+    z-index: 0;
+  }
+
+  .clock-text {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .time-row {
+    display: flex;
+    align-items: center;
+  }
+
+  #clock {
+    margin-right: 10px;
+  }
+
+  .ampm {
+    font-size: 25px;
+  }
+
+  .day-year {
+    font-size: 25px;
+    margin-top: 10px;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="clock-wrapper">
+
+    <div class="circle1"></div>
+    <div class="circle2"></div>
+
+    <div class="clock-container">
+        <div class="clock-text">
+            <div class="time-row">
+                <span id="clock">00:00:00</span>
+                <span class="ampm" id="ampm">AM</span>
+            </div>
+            <div class="day-year">
+                <span id="day">Friday</span> | <span id="year">2026</span>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+<script>
+function digitalClock() {
+    let time = new Date();
+
+    let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let day = days[time.getDay()];
+
+    let year = time.getFullYear();
+
+    let hours = time.getHours();
+    let minutes = time.getMinutes();
+    let seconds = time.getSeconds();
+    let ampm = "AM";
+
+    if(hours == 0) {
+        hours = 12;
+        ampm = "AM";
+    } else if(hours == 12) {
+        ampm = "PM";
+    } else if(hours > 12) {
+        hours -= 12;
+        ampm = "PM";
+    }
+
+    if(hours < 10) hours = "0" + hours;
+    if(minutes < 10) minutes = "0" + minutes;
+    if(seconds < 10) seconds = "0" + seconds;
+
+    document.getElementById("clock").innerText = hours + ":" + minutes + ":" + seconds;
+    document.getElementById("ampm").innerText = ampm;
+    document.getElementById("day").innerText = day;
+    document.getElementById("year").innerText = year;
+}
+
+setInterval(digitalClock, 1000);
+
+</script>
+
+</body>
+</html>

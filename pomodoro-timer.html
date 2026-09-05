@@ -1,0 +1,156 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+   
+    <title>POMODORO TIMER</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: cursive;
+        }
+        body{
+            min-height: 100vh;
+          background: linear-gradient(-135deg, #42275a, #734b6d, #f2994a);
+
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+        .container{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap:2em;
+            color: white;
+            background-color: rgba(255,255,255,0.20);
+            border-radius: 1em;
+            padding: 4em 3em;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+
+        }
+        .title{
+            font-size: 2em;
+        }
+        hr{
+            width: 100%;
+            background-color: white;
+            height: 5px;
+        }
+        .timer{
+            font-size: 8em;
+             text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+             font-weight: 500;
+        }
+        .button-wrapper{
+            display: flex;
+            gap:1em;
+        }
+        button{
+            font-size: 2em;
+            font-weight: 600;
+            letter-spacing: 1px;
+           transition: 0.2 ease-in-out;
+           cursor: pointer;
+           color:white;
+           border: none;
+           border-radius: 10%;
+
+        }
+        button:hover{
+            transform: translateY(-10px);
+        }
+        #start{
+              background: linear-gradient(-135deg, #7b6fcf, #5f4bb6);
+  color: #fff;
+}
+#stop{
+  background: linear-gradient(-135deg, #a24b7c, #7a2f5b);
+  color: #fff;
+}
+
+#reset{
+  background: linear-gradient(-135deg, #f2a07b, #d97b5f);
+  color: #fff;
+}
+
+        
+       
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">PomoDoro Timer</h1>
+        <hr>
+
+        <p class="timer" id="timer">25:00</p>
+
+        <div class="button-wraper">
+            <button id="start">start</button>
+            <button id="stop">stop</button>
+            <button id="reset">reset</button>
+        </div>
+
+
+    </div>
+
+    <script>
+const start = document.getElementById("start");
+const stop = document.getElementById("stop");
+const reset = document.getElementById("reset");
+const timer = document.getElementById("timer");
+
+let timeleft = 1500;
+let interval = null;
+
+const updateTimer = () => {
+    const minutes = Math.floor(timeleft / 60);
+    const seconds = timeleft % 60;
+
+    timer.innerHTML =
+        `${minutes.toString().padStart(2,"0")}:${seconds.toString().padStart(2,"0")}`;
+};
+
+const startTimer = () => {
+
+    if(interval) return;  
+
+    interval = setInterval(() => {
+        timeleft--;  
+
+        updateTimer();
+
+        if(timeleft === 0){
+            clearInterval(interval);
+            interval = null;
+            alert("Time's up!");
+        }
+    }, 1000);
+};
+
+const stopTimer = () => {
+    clearInterval(interval);
+    interval = null;
+};
+
+const resetTimer = () => {
+    clearInterval(interval);
+    interval = null;
+    timeleft = 1500;
+    updateTimer();
+};
+
+start.addEventListener("click", startTimer);
+stop.addEventListener("click", stopTimer);
+reset.addEventListener("click", resetTimer);
+
+updateTimer();
+</script>
+
+</body>
+</html>

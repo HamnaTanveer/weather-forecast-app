@@ -1,0 +1,148 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <title>async fetch</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <div class="nav-left">
+                <h1>Stride</h1>
+            </div>
+
+            <ul class="nav-center">
+
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#new">New Arrivals</a></li>
+                <li><a href="#sale">Sale</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+
+
+            <div class="nav-right">
+                <div class="search-container">
+                    <i class="fas fa-search nav-icon search-icon" onclick="toggleSearch()"></i>
+                    <input type="text" class="search-input" placeholder="Search...">
+                </div>
+
+                <i class="fas fa-moon nav-icon"></i>
+                <i class="fas fa-heart nav-icon"></i>
+                <i class="fas fa-shopping-bag nav-icon">
+                    <span class="cart-badge"></span>
+                </i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Step Into</h1>
+            <h2 class="hero-subtitle">Your Best</h2>
+            <p class="hero-description">
+                Premium footwear for every step of your journey.
+                From athletic performance to everyday comfort.
+            </p>
+            <div class="hero-buttons">
+                <a href="#shop" class="btn-primary">Shop Now →</a>
+                <a href="#categories" class="btn-secondary">Browse Categories</a>
+            </div>
+        </div>
+
+        <div class="hero-image">
+           
+            <img src="running.jpg" alt="Running Shoes">
+
+            
+            <div class="sale-badge">
+                <div>Upto</div>
+                <div><strong>40%</strong></div>
+                <div>off</div>
+            </div>
+        </div>
+    </section>
+
+
+    
+
+   <section class="category-section">
+        <!-- TOP LEFT HEADING -->
+        <div class="section-header">
+            <h2>Shop by Category</h2>
+            <p>Find the perfect pair for every occasion</p>
+        </div>
+
+        <!-- ROW 1 -->
+        <div class="cards-row" id="cards-row1">
+           <!--  <div class="card">
+                <img src="running.jpg" alt="Running">
+                <div class="card-text">
+                    <h3>Running</h3>
+                    <p>Performance shoes built for speed and endurance</p>
+                    <a href="#" class="shop-btn">Shop Now →</a>
+                </div>
+            </div>
+ --><!-- 
+            <div class="card">
+                <img src="sneaker.jpg" alt="Casual">
+                <div class="card-text">
+                    <h3>Sneaker</h3>
+                    <p>Classic and contemporary streetwear styles</p>
+                    <a href="#" class="shop-btn">Shop Now →</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="basketball.jpg" alt="Training">
+                <div class="card-text">
+                    <h3>BasketBall</h3>
+                    <p>Court-ready shoes  with superior ankel support</p>
+                    <a href="#" class="shop-btn">Shop Now →</a>
+                </div>
+            </div> -->
+        </div>
+
+        <!-- ROW 2 -->
+        <div class="cards-row" id="cards-row2">
+          <!--   <div class="card">
+                <img src="casual.jpg" alt="Formal"> 
+                <div class="card-text">
+                    <h3>Casual</h3>
+                    <p>Everyday comfort meets effortless style</p>
+                    <a href="#" class="shop-btn">Shop Now →</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="booots.jpg" alt="Sports">
+                <div class="card-text">
+                    <h3>Boots</h3>
+                    <p>Rugged style for any terrain</p>
+                    <a href="#" class="shop-btn">Shop Now →</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="sandals.jpg" alt="Sandals">
+                <div class="card-text">
+                    <h3>Sandals</h3>
+                    <p>Breathable comfort for warm days</p>
+                    <a href="#" class="shop-btn">Shop Now →</a>
+                </div>
+            </div> -->
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
