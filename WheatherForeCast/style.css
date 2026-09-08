@@ -57,7 +57,7 @@ body::after {
 
 input {
   flex: 1;
-  min-width: 0; /* Input box ko overflow hone se rokta hai */
+  min-width: 0; 
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -100,7 +100,7 @@ button:hover {
   padding: 15px;
 }
 
-/* Bohat choti mobile screens ke liye */
+
 @media (max-width: 320px) {
   .container {
     padding: 12px;
