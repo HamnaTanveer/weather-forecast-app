@@ -2,67 +2,131 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Counter App</title>
+<!-- Favicon Link Added -->
+<link rel="icon" type="image/png" sizes="32x32" href="ccc.png">
 
 <style>
-body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background: linear-gradient(135deg,#a18cd1,#fbc2eb);
-    font-family: Arial, Helvetica, sans-serif;
+:root {
+    --bg-one: #fff6ed;
+    --bg-two: #f3e5d8;
+    --card-bg: rgba(255, 250, 245, 0.85);
+    --border-color: rgba(220, 202, 185, 0.8);
+    --text-color: #3d312a;
+    --title-color: #8c7a70;
+    
+    /* Perfect Matching Gradients for Buttons */
+    --accent-inc: linear-gradient(135deg, #d97706, #b45309); /* Warm Amber */
+    --accent-dec: linear-gradient(135deg, #78350f, #451a03); /* Rich Deep Mocha */
+    --accent-reset: linear-gradient(135deg, #a88a78, #826555); /* Soft Taupe */
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Background matching with button tones combo */
+    background: linear-gradient(135deg, var(--bg-one), var(--bg-two));
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
     overflow: hidden;
+    margin: 0;
 }
 
 /* Card */
-.counter-box{
-    background:white;
-    padding:40px;
-    border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.2);
-    text-align:center;
+.counter-box {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(120, 95, 75, 0.15);
+    text-align: center;
+}
+
+/* Title */
+.counter-box h2 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--title-color);
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 /* Number */
-#count{
-    font-size:60px;
-    margin:25px 0;
-    font-weight:bold;
+#count {
+    font-size: 72px;
+    margin: 10px 0 30px 0;
+    font-weight: 700;
+    color: var(--text-color);
+    letter-spacing: -2px;
 }
 
 /* Buttons */
-.buttons{
-    display:flex;
-    gap:15px;
-    justify-content:center;
+.buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
 }
 
-button{
-    padding:10px 20px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:16px;
-    color:white;
+button {
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 600;
+    color: #ffffff;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 16px rgba(120, 95, 75, 0.2);
 }
 
-/* Different colors */
-.increase{
-    background:#4CAF50;
+/* Unique Palettes */
+.decrease {
+    background: var(--accent-dec);
 }
 
-.decrease{
-    background:#f44336;
+.reset {
+    background: var(--accent-reset);
 }
 
-.reset{
-    background:#555;
+.increase {
+    background: var(--accent-inc);
 }
 
-button:hover{
-    opacity:0.8;
+button:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+    box-shadow: 0 8px 20px rgba(120, 95, 75, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Responsive for mobile screens */
+@media (max-width: 480px) {
+    .counter-box {
+        padding: 30px 20px;
+        width: 85%;
+    }
+    
+    #count {
+        font-size: 60px;
+    }
+    
+    .buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    button {
+        width: 100%;
+        padding: 10px;
+    }
 }
 </style>
 </head>
